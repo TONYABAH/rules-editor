@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Exprt Rules&trade;</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="scrollbars.css">-->
+<style>
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color:green;
+    border-top: 1px solid #777;
+    color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-shadow: 2px 2px 3px #000;
+  }
+  .main {
+    border: 1px solid greenyellow;
+    left: 4px;
+    right: 4px;
+    top: 55px;
+    bottom: 38px;
+    position: absolute;
+    text-shadow: none;
+  }
+  .row {
+    background-color: antiquewhite;
+  }
+</style>
+<script type="text/javascript" src="../node_modules/ace-builds/src-noconflict/ace.js"></script>
+<script type="text/javascript" src="./rules-engine-lib.min.js"></script>
+<script type="text/javascript" src="../lib/rules-editor.umd.js"></script>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h3>Rules Expert System&trade;</h3>
+</div>
+
+<!-- The flexible grid (content) -->
+<div class="row">
+  <div class="main" id="editor" />
+</div>
+<script type="module" src="main.js"></script>
+</body>
+</html>
