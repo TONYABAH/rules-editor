@@ -31,8 +31,8 @@
   }
 </style>
 <script type="text/javascript" src="../node_modules/ace-builds/src-noconflict/ace.js"></script>
-<script type="text/javascript" src="./rules-engine-lib.min.js"></script>
-<script type="text/javascript" src="../lib/rules-editor.umd.js"></script>
+<script type="text/javascript" src="../node_modules/rules-engine/dist/rules-engine.umd.js"></script>
+<script type="text/javascript" src="../dist/rules-editor.umd.js"></script>
 </head>
 <body>
 
@@ -45,6 +45,9 @@
 <div class="row">
   <div class="main" id="editor" />
 </div>
-<script type="module" src="main.js"></script>
+<script type="module" src="/app/main.js"></script>
+<script id="__bs_script__">//<![CDATA[
+  document.write("<script async src='http://localhost:3000/browser-sync/browser-sync-client.js?v=2.26.14'><\/script>".replace("HOST", location.hostname));
+//]]></script>
 </body>
 </html>

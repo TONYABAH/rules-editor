@@ -4,11 +4,12 @@
   "amdName": "RulesEditor",
   "version": "1.0.0",
   "description": "Rules editor library",
-  "source": "index.js", 
+  "source": "index.js",
   "main": "dist/rules-editor.umd.js",
   "module": "lib/rules-editor.js",
   "files": [
-    "dist", "lib"
+    "dist",
+    "lib"
   ],
   "keywords": [
     "expert",
@@ -20,15 +21,13 @@
   "license": "ISC",
   "scripts": {
     "build": "microbundle --name RulesEditor --external none  -o dist -f umd --dist",
-    "build:dev": "microbundle --name RulesEditor --external rules-engine-lib,ace-builds* --globals ace-builds=ace,rules-engine-lib=RulesEngine -o lib --no-compress --dist",
-    "dev": "microbundle -f umd watch",
-    "serve": "serve"
+    "build:dev": "microbundle --name RulesEditor --external rules-engine,ace-builds* --globals ace-builds=ace,rules-engine=RulesEngine -o lib --no-compress --dist",
+    "dev": "microbundle -f umd --no-compress --external rules-engine,ace-builds* --globals ace-builds=ace,rules-engine=RulesEngine watch",
+    "start": " browser-sync start --server --serveStatic node_modules,dist --index demo/index.html -w -f app,demo,src,node_modules"
   },
   "devDependencies": {
     "microbundle": "^0.13.0",
     "ace-builds": "^1.4.12"
   },
-  "dependencies": {
- 
-  }
+  "dependencies": {}
 }

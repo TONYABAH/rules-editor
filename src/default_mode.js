@@ -1,7 +1,7 @@
 /* jslint esversion:8 */
 import { TextMode } from './ace-wrapper'
 
-import { Parser } from 'rules-engine-lib'
+import { Parser } from './engine-wrapper'
 import HighlightRules from './default_highlight_rules'
 import DefaultFoldMode from './default_fold'
 import debounce from './debounce'
@@ -20,7 +20,7 @@ export default class extends TextMode {
     // If static highlighter, do not watch for changes
     if (watch) this.watch()
   }
-
+ 
   watch () {
     this.foldingRules = new DefaultFoldMode()
     this.parser = new Parser(this.editor.session.language || 'en')

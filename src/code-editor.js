@@ -8,27 +8,29 @@ import {
 import Mode from './default_mode'
 import ResourceMode from './resource_mode'
 
-class AceEditor {
+class CodeEditor {
   constructor () {
-    if (!AceEditor.instance) {
-      AceEditor.instance = this
+    if (!CodeEditor.instance) {
+      CodeEditor.instance = this
     }
     this.language = 'en'
     this.editors = []
     this.theme = null
 
-    return AceEditor.instance
+    return CodeEditor.instance
   }
-
+ 
   setHighlightRule (editor, mode) {
+    // return this.setHighlightRules(editor, mode)
     let defaultMode = null
     if (mode !== 'res') {
       defaultMode = new Mode(editor)
     } else {
       defaultMode = new ResourceMode(editor)
     }
-    editor.session.setMode(defaultMode)
-    editor.session.bgTokenizer.start(0)
+    editor.session.setMode(defaultMode, () => {
+      editor.session.bgTokenizer.start(0)
+    })
   }
 
   edit (element, options = {}) {
@@ -67,7 +69,7 @@ class AceEditor {
       selectionStyle: 'row',
       highlightActiveLine: true,
       showPrintMargin: true,
-      theme: 'ace/theme/twilight',
+      theme: 'ace/theme/ambiance',
     }
     editor = ace.edit(el, Object.assign(editorSettings, options) )
     editor.data = options.data || {}
@@ -117,7 +119,31 @@ class AceEditor {
     return this.editors
   }
 }
-const instance = new AceEditor()
+const instance = new CodeEditor()
 Object.freeze(instance)
 
+/*  setHighlightRules (editor, language) {
+    const lang = language || 'text'
+    const session = editor.session
+    editor.session.setMode('ace/mode/' + lang, function () {
+    const rules = session.$mode.$highlightRules.getRules()
+      for (let stateName in rules) {
+        if (Object.prototype.hasOwnProperty.call(rules, stateName)) {
+          rules[stateName].unshift({
+            token: 'keyword',
+            regex: /TITLE/,
+          }, {
+            token: 'constant',
+            regex: /GOAL/,
+          })
+        }
+      }
+      // console.log(session.$mode)
+      // force recreation of tokenizer
+      session.$mode.$tokenizer = null
+      session.bgTokenizer.setTokenizer(session.$mode.getTokenizer())
+      // force re-highlight whole document
+      session.bgTokenizer.start(0)
+    })
+  } */
 export default instance

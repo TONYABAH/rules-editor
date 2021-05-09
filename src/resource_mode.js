@@ -1,5 +1,5 @@
 import { TextMode } from './ace-wrapper'
-import { ResParser as Parser } from 'rules-engine-lib'
+import { ResParser as Parser } from './engine-wrapper'
 import debounce from './debounce'
 import HighlightRules from './resource_highlight_rules'
 import DefaultFoldMode from './resource_fold'
