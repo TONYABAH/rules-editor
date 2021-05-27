@@ -23,7 +23,7 @@
     "build": "microbundle --name RulesEditor --external none  -o dist -f umd --dist",
     "build:dev": "microbundle --name RulesEditor --external rules-engine,ace-builds* --globals ace-builds=ace,rules-engine=RulesEngine -o lib --no-compress --dist",
     "dev": "microbundle -f umd --no-compress --external rules-engine,ace-builds* --globals ace-builds=ace,rules-engine=RulesEngine watch",
-    "start": " browser-sync start --server --serveStatic node_modules,dist --index demo/index.html -w -f app,demo,src,node_modules"
+    "serve": "browser-sync start --server --serveStatic node_modules,dist --index demo/index.html -w -f app,demo,src,node_modules"
   },
   "devDependencies": {
     "microbundle": "^0.13.0",

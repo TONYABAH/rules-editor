@@ -6,7 +6,7 @@ import {
   UndoManager,
 } from 'ace-builds'
 
-import 'ace-builds/src-noconflict/theme-cobalt.js'
+/* import 'ace-builds/src-noconflict/theme-cobalt.js'
 import 'ace-builds/src-noconflict/theme-merbivore_soft.js'
 import 'ace-builds/src-noconflict/theme-monokai.js'
 import 'ace-builds/src-noconflict/theme-tomorrow_night_blue.js'
@@ -14,7 +14,7 @@ import 'ace-builds/src-noconflict/theme-twilight.js'
 import 'ace-builds/src-noconflict/theme-solarized_light.js'
 import 'ace-builds/src-noconflict/theme-ambiance.js'
 import 'ace-builds/src-noconflict/theme-chrome.js'
-import 'ace-builds/src-noconflict/theme-textmate.js'
+import 'ace-builds/src-noconflict/theme-textmate.js' */
 
 const TextHighlightRules = ace.require('ace/mode/text_highlight_rules').TextHighlightRules
 const BaseFoldMode = ace.require('ace/mode/folding/fold_mode').FoldMode

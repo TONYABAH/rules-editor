@@ -69,7 +69,7 @@ class CodeEditor {
       selectionStyle: 'row',
       highlightActiveLine: true,
       showPrintMargin: true,
-      theme: 'ace/theme/ambiance',
+      theme: 'ace/theme/tomorrow_night_blue',
     }
     editor = ace.edit(el, Object.assign(editorSettings, options) )
     editor.data = options.data || {}

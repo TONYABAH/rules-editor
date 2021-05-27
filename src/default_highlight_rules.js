@@ -3,7 +3,7 @@ import * as wrapper from './ace-wrapper'
 const TextHighlightRules = wrapper.TextHighlightRules
 
 import { Keywords } from './engine-wrapper'
-
+// console.log(Keywords)
 class HighlightRules extends TextHighlightRules {
   constructor (language) {
     super()

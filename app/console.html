@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Rules Interface</title>
+    <script type = 'module'>
+      // import Viewer from './buttons/viewer.js'
+      import { Ux } from '../node_modules/rules-engine/dist/rules-engine.modern.js'
+      // new Viewer('app', 'banner')
+      const ux = new Ux('app')
+      const data = localStorage.getItem('@rules-editor')
+      ux.run(data)
+      // popup.postMessage("hello there!", "http://example.com");
+      // Called sometime after postMessage is called
+      window.addEventListener ('beforeunload', function(e) {
+        // e.preventDefault()
+        // e.returnValue = '';
+        // delete e['returnValue'];
+      })
+    </script>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background-color: green;
+      }
+      .main {
+        position: absolute;
+        top: 32px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+      }
+      .header {
+        height: 32px;
+        padding-top: 4px;
+        background-color: #333;
+      }
+      .app {
+        background-color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div class="row banner-row header" >
+      <div class="col" id="banner"></div>
+    </div>
+    <div class="row main">
+      <div id="app" class="col"></div>
+    </div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
