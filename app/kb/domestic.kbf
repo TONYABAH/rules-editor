@@ -55,7 +55,8 @@ Else animal name is 'Not known'
 Prompt number of feet
 Question How many feet does the animal have?
 Menu (8, 6, 4, 2)
-Min 1 Max 4
+Min 1 
+Max 4
 //%
 
 Prompt animal used as pet

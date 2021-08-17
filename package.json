@@ -5,11 +5,11 @@
   "version": "1.0.0",
   "description": "Rules editor library",
   "source": "index.js",
-  "main": "dist/rules-editor.umd.js",
-  "module": "lib/rules-editor.js",
+  "main": "dist/rules-editor.js",
+  "exports": "index.js",
+  "unpkg": "dist/rules-editor.umd.js",
   "files": [
-    "dist",
-    "lib"
+    "dist"
   ],
   "keywords": [
     "expert",
@@ -20,9 +20,8 @@
   "author": "Tony Abah <tonyarmyabah@gmail.com> (https://www.ampani.com)",
   "license": "ISC",
   "scripts": {
-    "build": "microbundle --name RulesEditor --external none  -o dist -f umd --dist",
-    "build:dev": "microbundle --name RulesEditor --external rules-engine,ace-builds* --globals ace-builds=ace,rules-engine=RulesEngine -o lib --no-compress --dist",
-    "dev": "microbundle -f umd --no-compress --external rules-engine,ace-builds* --globals ace-builds=ace,rules-engine=RulesEngine watch",
+    "build": "microbundle --name RulesEditor --external rules-engine,ace-builds* --globals ace-builds=ace,rules-engine=RulesEngine",
+    "dev": "microbundle --no-compress --external rules-engine,ace-builds* --globals ace-builds=ace,rules-engine=RulesEngine watch",
     "serve": "browser-sync start --server --serveStatic node_modules,dist --index demo/index.html -w -f app,demo,src,node_modules"
   },
   "devDependencies": {

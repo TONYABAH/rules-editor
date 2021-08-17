@@ -2,7 +2,7 @@
 import * as wrapper from './ace-wrapper'
 const TextHighlightRules = wrapper.TextHighlightRules
 
-import { Keywords } from './engine-wrapper'
+import epicRules from './engine-wrapper'
 // console.log(Keywords)
 class HighlightRules extends TextHighlightRules {
   constructor (language) {
@@ -101,7 +101,8 @@ class HighlightRules extends TextHighlightRules {
   }
   // Set language definition dynamically at run time
   setLanguage (language) {
-    this.keywords = Keywords[language]
+    const r = epicRules(language, ['fr', 'de'])
+    this.keywords = r.getKeywords()
     if (!this.keywords) {
       throw new Error('Language not supported yet: ' + language || '')
     }

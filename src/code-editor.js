@@ -1,12 +1,10 @@
 import {
-  ace,
-  EditSession,
-  UndoManager,
-  Themes,
+  ace, EditSession, UndoManager, Themes,
 } from './ace-wrapper'
 
 import Mode from './default_mode'
 import ResourceMode from './resource_mode'
+import dynamicMode from './dynamic-mode'
 
 class CodeEditor {
   constructor () {
@@ -15,18 +13,27 @@ class CodeEditor {
     }
     this.language = 'en'
     this.editors = []
-    this.theme = null
+    this.defaults = {
+      fontSize: 18,
+      fontName: 'Courier New',
+      theme: 'ace/theme/tomorrow_night_blue'
+    }
+    this.theme = this.defaults.theme // 'ace/theme/tomorrow_night_blue'
+    this.fontSize = this.defaults.fontSize
+    this.fontName = this.defaults.fontName
 
     return CodeEditor.instance
   }
  
-  setHighlightRule (editor, mode) {
+  setHighlightRule (editor, ext) {
     // return this.setHighlightRules(editor, mode)
     let defaultMode = null
-    if (mode !== 'res') {
+    if (ext === '.kbf') {
       defaultMode = new Mode(editor)
-    } else {
+    } else if (ext === '.res') {
       defaultMode = new ResourceMode(editor)
+    }else {
+      defaultMode = dynamicMode(ext)
     }
     editor.session.setMode(defaultMode, () => {
       editor.session.bgTokenizer.start(0)
@@ -52,14 +59,16 @@ class CodeEditor {
       console.error('Invalid options parameter : ' + options)
       return null
     }
+
     let editor = null
     const session = new EditSession(options.text || '')
     session.language = options.language ? options.language : this.language
     session.setUndoManager(new UndoManager())
-    
+
     const editorSettings = {
-      fontSize: 18,
-      fontFamily: 'Courier New',
+      fontSize: options.fontSize || this.fontSize,
+      fontFamily: options.fontName || this.fontName,
+      theme: options.theme || this.theme,
       showLineNumbers: true,
       readOnly: false,
       showGutter: true,
@@ -68,9 +77,9 @@ class CodeEditor {
       maxLines: undefined,
       selectionStyle: 'row',
       highlightActiveLine: true,
-      showPrintMargin: true,
-      theme: 'ace/theme/tomorrow_night_blue',
+      showPrintMargin: true
     }
+
     editor = ace.edit(el, Object.assign(editorSettings, options) )
     editor.data = options.data || {}
     editor.setSession(session)
@@ -98,6 +107,11 @@ class CodeEditor {
   }
 
   reset () {
+    this.FontSize = this.defaults.fontSize
+    this.FontName = this.defaults.fontName
+    this.Theme = this.defaults.theme
+  }
+  destroy () {
     this.editors.forEach((editor) => {
       editor.destroy()
     })
@@ -106,15 +120,32 @@ class CodeEditor {
     return Themes
   }
   set Theme (val) {
-    if (Themes.dark[val] || Themes.light[val]) {
-      this.theme = 'ace/theme/' + val;
+    if (!val) {
+      console.log('Theme not set')
+      return
+    }
+    let theme = (val && val.toLowerCase()) 
+    if (this.Themes.dark.find((item) => item.toLowerCase() === theme.toLocaleLowerCase()) ||
+      this.Themes.light.find((item) => item.toLowerCase() === theme.toLocaleLowerCase())){
+      this.theme = 'ace/theme/' + theme.replace(/\s+/g, '_')
       this.editors.forEach(editor => editor.setTheme(this.theme))
     }
   }
   get Theme () {
     return this.theme
   }
-
+  get FontName () {
+    return this.fontName
+  }
+  set FontName (value) {
+    this.fontName = value
+  }
+  get FontSize () {
+    return this.fontSize
+  }
+  set FontSize (value) {
+    this.fontSize = value
+  }
   get Editors () {
     return this.editors
   }

@@ -6,7 +6,7 @@ import {
   UndoManager,
 } from 'ace-builds'
 
-/* import 'ace-builds/src-noconflict/theme-cobalt.js'
+import 'ace-builds/src-noconflict/theme-cobalt.js'
 import 'ace-builds/src-noconflict/theme-merbivore_soft.js'
 import 'ace-builds/src-noconflict/theme-monokai.js'
 import 'ace-builds/src-noconflict/theme-tomorrow_night_blue.js'
@@ -14,7 +14,10 @@ import 'ace-builds/src-noconflict/theme-twilight.js'
 import 'ace-builds/src-noconflict/theme-solarized_light.js'
 import 'ace-builds/src-noconflict/theme-ambiance.js'
 import 'ace-builds/src-noconflict/theme-chrome.js'
-import 'ace-builds/src-noconflict/theme-textmate.js' */
+import 'ace-builds/src-noconflict/theme-textmate.js'
+require('ace-builds/webpack-resolver')
+// const path = 'ace-builds/src-noconflict/'
+// ace.config.set('basePath', path)
 
 const TextHighlightRules = ace.require('ace/mode/text_highlight_rules').TextHighlightRules
 const BaseFoldMode = ace.require('ace/mode/folding/fold_mode').FoldMode
@@ -22,19 +25,19 @@ const TokenIterator = ace.require('ace/token_iterator').TokenIterator
 
 const TextMode = ace.require('ace/mode/text').Mode
 const Themes = {
-  light: {
-    solarized_light: 'Solarized Light',
-    ambience: 'Ambience',
-    chrome: 'Chrome',
-    textmate: 'textmate'
-  },
-  dark: {
-    cobalt: 'Cobalt',
-    merbivore_soft: 'Merbivore Soft',
-    monokai: 'monokai',
-    tomorrow_night_blue: 'Tomorrow Night Blue',
-    twilight: 'Twilight'
-  },
+  light: [
+    'Solarized Light',
+    'Ambience',
+    'Chrome',
+    'Textmate'
+  ],
+  dark: [
+    'Cobalt',
+    'Merbivore Soft',
+    'Monokai',
+    'Tomorrow night blue',
+    'Twilight'
+  ],
   // default: ace.require('ace/theme/ambiance'),
 }
 
