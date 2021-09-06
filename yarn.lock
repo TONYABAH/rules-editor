@@ -2598,8 +2598,8 @@
     "fsevents" "~2.3.2"
 
 "rules-engine@github:TONYABAH/rules-engine":
-  "resolved" "git+ssh://git@github.com/TONYABAH/rules-engine.git#1a45d59b5d1fffe1a5fa875bc7de2194563c92ba"
-  "version" "1.0.0"
+  "resolved" "git+ssh://git@github.com/TONYABAH/rules-engine.git#fd1e77f443c1d38f2c6e09322b4619c30679964f"
+  "version" "1.0.1"
 
 "sade@^1.7.4":
   "integrity" "sha512-y5yauMD93rX840MwUJr7C1ysLFBgMspsdTo4UVrDg3fXDvtwOyIqykhVAAm6fk/3au77773itJStObgK+LKaiA=="
