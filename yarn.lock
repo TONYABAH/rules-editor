@@ -2597,8 +2597,8 @@
   optionalDependencies:
     "fsevents" "~2.3.2"
 
-"rules-engine@file:../rules-engine":
-  "resolved" "file:../rules-engine"
+"rules-engine@github:TONYABAH/rules-engine":
+  "resolved" "git+ssh://git@github.com/TONYABAH/rules-engine.git#1a45d59b5d1fffe1a5fa875bc7de2194563c92ba"
   "version" "1.0.0"
 
 "sade@^1.7.4":

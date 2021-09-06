@@ -2,7 +2,7 @@
   "private": true,
   "name": "rules-editor",
   "amdName": "RulesEditor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Rules editor library",
   "source": "index.js",
   "main": "dist/rules-editor.js",
@@ -27,5 +27,8 @@
   "devDependencies": {
     "ace-builds": "^1.4.12",
     "microbundle": "^0.13.0"
+  },
+  "dependencies": {
+    "rules-engine": "github:TONYABAH/rules-engine"
   }
 }
