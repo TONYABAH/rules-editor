@@ -1,45 +1,39 @@
-import ace from 'ace-builds'
+// import ace from "ace-builds";
+const ace = window.ace
+// import { Range, EditSession, UndoManager } from "ace-builds";
+const { Range, EditSession, UndoManager } = ace
+/*import "ace-builds/src-noconflict/theme-cobalt.js";
+import "ace-builds/src-noconflict/theme-merbivore_soft.js";
+import "ace-builds/src-noconflict/theme-monokai.js";
+import "ace-builds/src-noconflict/theme-tomorrow_night_blue.js";
+import "ace-builds/src-noconflict/theme-twilight.js";
+import "ace-builds/src-noconflict/theme-solarized_light.js";
+import "ace-builds/src-noconflict/theme-ambiance.js";
+import "ace-builds/src-noconflict/theme-chrome.js";
+import "ace-builds/src-noconflict/theme-textmate.js";
+import "ace-builds/webpack-resolver";
+const path = "ace-builds/src-noconflict/";
+ace.config.set("basePath", path);*/
+const TextHighlightRules = ace.require(
+    "ace/mode/text_highlight_rules"
+).TextHighlightRules;
 
-import {
-  Range,
-  EditSession,
-  UndoManager,
-} from 'ace-builds'
-
-import 'ace-builds/src-noconflict/theme-cobalt.js'
-import 'ace-builds/src-noconflict/theme-merbivore_soft.js'
-import 'ace-builds/src-noconflict/theme-monokai.js'
-import 'ace-builds/src-noconflict/theme-tomorrow_night_blue.js'
-import 'ace-builds/src-noconflict/theme-twilight.js'
-import 'ace-builds/src-noconflict/theme-solarized_light.js'
-import 'ace-builds/src-noconflict/theme-ambiance.js'
-import 'ace-builds/src-noconflict/theme-chrome.js'
-import 'ace-builds/src-noconflict/theme-textmate.js'
-require('ace-builds/webpack-resolver')
-// const path = 'ace-builds/src-noconflict/'
-// ace.config.set('basePath', path)
-
-const TextHighlightRules = ace.require('ace/mode/text_highlight_rules').TextHighlightRules
-const BaseFoldMode = ace.require('ace/mode/folding/fold_mode').FoldMode
-const TokenIterator = ace.require('ace/token_iterator').TokenIterator
-
-const TextMode = ace.require('ace/mode/text').Mode
+const TextMode = ace.require("ace/mode/text").Mode;
+const BaseFoldMode = ace.require("ace/mode/folding/fold_mode").FoldMode;
+const TokenIterator = ace.require("ace/token_iterator").TokenIterator;
+// console.log(TextMode);
+// const JSONMode = ace.require("ace/mode/json").Mode;
 const Themes = {
-  light: [
-    'Solarized Light',
-    'Ambience',
-    'Chrome',
-    'Textmate'
-  ],
-  dark: [
-    'Cobalt',
-    'Merbivore Soft',
-    'Monokai',
-    'Tomorrow night blue',
-    'Twilight'
-  ],
-  // default: ace.require('ace/theme/ambiance'),
-}
+    light: ["Solarized Light", "Ambience", "Chrome", "Textmate"],
+    dark: [
+        "Cobalt",
+        "Merbivore Soft",
+        "Monokai",
+        "Tomorrow night blue",
+        "Twilight",
+    ],
+    // default: ace.require('ace/theme/ambiance'),
+};
 
 // import modes that you want to include into your main bundle
 // import 'ace-builds/src-noconflict/mode-javascript'
@@ -62,13 +56,14 @@ const Themes = {
 // import * as TextNode from 'ace-builds/src-noconflict/mode-text'
 
 export {
-  ace,
-  Range,
-  EditSession,
-  UndoManager,
-  BaseFoldMode,
-  TokenIterator,
-  TextHighlightRules,
-  TextMode,
-  Themes,
-}
+    ace,
+    Range,
+    EditSession,
+    UndoManager,
+    BaseFoldMode,
+    TokenIterator,
+    TextHighlightRules,
+    TextMode,
+    // JSONMode,
+    Themes,
+};

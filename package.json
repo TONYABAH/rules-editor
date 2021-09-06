@@ -6,7 +6,7 @@
   "description": "Rules editor library",
   "source": "index.js",
   "main": "dist/rules-editor.js",
-  "exports": "index.js",
+  "exports": "./index.js",
   "unpkg": "dist/rules-editor.umd.js",
   "files": [
     "dist"
@@ -25,8 +25,7 @@
     "serve": "browser-sync start --server --serveStatic node_modules,dist --index demo/index.html -w -f app,demo,src,node_modules"
   },
   "devDependencies": {
-    "microbundle": "^0.13.0",
-    "ace-builds": "^1.4.12"
-  },
-  "dependencies": {}
+    "ace-builds": "^1.4.12",
+    "microbundle": "^0.13.0"
+  }
 }

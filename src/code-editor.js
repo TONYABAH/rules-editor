@@ -1,157 +1,166 @@
-import {
-  ace, EditSession, UndoManager, Themes,
-} from './ace-wrapper'
+import { ace, EditSession, UndoManager, Themes } from "./ace-wrapper";
 
-import Mode from './default_mode'
-import ResourceMode from './resource_mode'
-import dynamicMode from './dynamic-mode'
+import Mode from "./default_mode";
+import ResourceMode from "./resource_mode";
+import dynamicMode from "./dynamic-mode";
 
 class CodeEditor {
-  constructor () {
-    if (!CodeEditor.instance) {
-      CodeEditor.instance = this
-    }
-    this.language = 'en'
-    this.editors = []
-    this.defaults = {
-      fontSize: 18,
-      fontName: 'Courier New',
-      theme: 'ace/theme/tomorrow_night_blue'
-    }
-    this.theme = this.defaults.theme // 'ace/theme/tomorrow_night_blue'
-    this.fontSize = this.defaults.fontSize
-    this.fontName = this.defaults.fontName
+    constructor() {
+        if (!CodeEditor.instance) {
+            CodeEditor.instance = this;
+        }
+        this.language = "en";
+        this.editors = [];
+        this.defaults = {
+            fontSize: 18,
+            fontName: "Courier New",
+            theme: "ace/theme/tomorrow_night_blue",
+        };
+        this.theme = this.defaults.theme; // 'ace/theme/tomorrow_night_blue'
+        this.fontSize = this.defaults.fontSize;
+        this.fontName = this.defaults.fontName;
 
-    return CodeEditor.instance
-  }
- 
-  setHighlightRule (editor, ext) {
-    // return this.setHighlightRules(editor, mode)
-    let defaultMode = null
-    if (ext === '.kbf') {
-      defaultMode = new Mode(editor)
-    } else if (ext === '.res') {
-      defaultMode = new ResourceMode(editor)
-    }else {
-      defaultMode = dynamicMode(ext)
-    }
-    editor.session.setMode(defaultMode, () => {
-      editor.session.bgTokenizer.start(0)
-    })
-  }
-
-  edit (element, options = {}) {
-    let el = null
-    if (typeof element === 'string') {
-      if (document.getElementById(element)) {
-        el = document.getElementById(element)
-      } else if (document.querySelector(element)) {
-        el = document.querySelector(element)
-      }
-    } else if (element && (element.id || element.tagName)) {
-      el = element
-    }
-    if (!el) {
-      console.error('Invalid container reference: ' + el)
-      return null
-    }
-    if (typeof options !== 'object') {
-      console.error('Invalid options parameter : ' + options)
-      return null
+        return CodeEditor.instance;
     }
 
-    let editor = null
-    const session = new EditSession(options.text || '')
-    session.language = options.language ? options.language : this.language
-    session.setUndoManager(new UndoManager())
+    setHighlightRule(editor, fileName) {
+        // return this.setHighlightRules(editor, mode)
+        const ext = fileName
+            ? fileName.substring(fileName.indexOf("."))
+            : ".kbf";
+        let defaultMode = null;
+        if (ext === ".kbf") {
+            defaultMode = new Mode(editor);
+        } else if (ext === ".res") {
+            defaultMode = new ResourceMode(editor);
+        } else {
+            const modePath = dynamicMode(fileName);
+            const DynamicMode = ace.require(modePath).Mode;
+            editor.session.setMode(new DynamicMode());
+        }
 
-    const editorSettings = {
-      fontSize: options.fontSize || this.fontSize,
-      fontFamily: options.fontName || this.fontName,
-      theme: options.theme || this.theme,
-      showLineNumbers: true,
-      readOnly: false,
-      showGutter: true,
-      animatedScroll: true,
-      minLines: 5,
-      maxLines: undefined,
-      selectionStyle: 'row',
-      highlightActiveLine: true,
-      showPrintMargin: true
+        editor.session.setMode(defaultMode, () => {
+            editor.session.bgTokenizer.start(0);
+        });
     }
 
-    editor = ace.edit(el, Object.assign(editorSettings, options) )
-    editor.data = options.data || {}
-    editor.setSession(session)
-    editor.renderer.setScrollMargin(10, 10, 10, 10);
-    editor.$blockScrolling = Infinity
-    editor.setOptions({
-      scrollPastEnd: 0.9,
-      autoScrollEditorIntoView: true,
-    })
-    editor.focus()
-    // editor.select()
-    // editor.gotoLine(0)
-    // editor.blur(true)
-    // this.editor.session.selection.on('changeSelection', function(){});
-    // this.editor.session.selection.on('changeCursor', function(){});
-    this.setHighlightRule(editor, options.mode)
-    this.editors.push(editor)
-    setTimeout(() => {
-      // let sel = editor.selection
-      // sel.clearSelection()
-      editor.clearSelection()
-    }, 0)
-   
-    return editor
-  }
+    edit(element, options = {}) {
+        let el = null;
+        if (typeof element === "string") {
+            el =
+                document.getElementById(element) ||
+                document.querySelector(element);
+        } else if (element && (element.id || element.tagName)) {
+            el = element;
+        }
+        if (!el) {
+            console.error("Invalid container reference: " + el);
+            return null;
+        }
+        if (typeof options !== "object") {
+            console.error("Invalid options parameter : " + options);
+            return null;
+        }
 
-  reset () {
-    this.FontSize = this.defaults.fontSize
-    this.FontName = this.defaults.fontName
-    this.Theme = this.defaults.theme
-  }
-  destroy () {
-    this.editors.forEach((editor) => {
-      editor.destroy()
-    })
-  }
-  get ThemeList () {
-    return Themes
-  }
-  set Theme (val) {
-    if (!val) {
-      console.log('Theme not set')
-      return
+        let editor = null;
+        const session = new EditSession(options.text ? options.text : "");
+        session.language = options.language ? options.language : this.language;
+        session.setUndoManager(new UndoManager());
+
+        const editorSettings = {
+            fontSize: options.fontSize || this.fontSize,
+            fontFamily: options.fontName || this.fontName,
+            theme: options.theme || this.theme,
+            showLineNumbers: true,
+            readOnly: false,
+            showGutter: true,
+            animatedScroll: true,
+            minLines: 5,
+            maxLines: 'auto',
+            selectionStyle: "row",
+            highlightActiveLine: true,
+            showPrintMargin: true,
+        };
+
+        editor = ace.edit(el, Object.assign(editorSettings, options));
+        editor.data = options.data || {};
+        editor.setSession(session);
+        editor.renderer.setScrollMargin(10, 10, 10, 10);
+        editor.$blockScrolling = Infinity;
+        editor.setOptions({
+            scrollPastEnd: 0.9,
+            autoScrollEditorIntoView: true,
+        });
+        editor.focus();
+        // editor.select()
+        // editor.gotoLine(0)
+        // editor.blur(true)
+        // this.editor.session.selection.on('changeSelection', function(){});
+        // this.editor.session.selection.on('changeCursor', function(){});
+        this.setHighlightRule(editor, options.fileName);
+        this.editors.push(editor);
+        setTimeout(() => {
+            // let sel = editor.selection
+            // sel.clearSelection()
+            editor.clearSelection();
+        }, 0);
+
+        return editor;
     }
-    let theme = (val && val.toLowerCase()) 
-    if (this.Themes.dark.find((item) => item.toLowerCase() === theme.toLocaleLowerCase()) ||
-      this.Themes.light.find((item) => item.toLowerCase() === theme.toLocaleLowerCase())){
-      this.theme = 'ace/theme/' + theme.replace(/\s+/g, '_')
-      this.editors.forEach(editor => editor.setTheme(this.theme))
+
+    reset() {
+        this.FontSize = this.defaults.fontSize;
+        this.FontName = this.defaults.fontName;
+        this.Theme = this.defaults.theme;
     }
-  }
-  get Theme () {
-    return this.theme
-  }
-  get FontName () {
-    return this.fontName
-  }
-  set FontName (value) {
-    this.fontName = value
-  }
-  get FontSize () {
-    return this.fontSize
-  }
-  set FontSize (value) {
-    this.fontSize = value
-  }
-  get Editors () {
-    return this.editors
-  }
+    destroy() {
+        this.editors.forEach((editor) => {
+            editor.destroy();
+            editor.container.remove();
+        });
+    }
+    get ThemeList() {
+        return Themes;
+    }
+    set Theme(val) {
+        if (!val) {
+            console.log("Theme not set");
+            return;
+        }
+        let theme = val && val.toLowerCase();
+        if (
+            this.Themes.dark.find(
+                (item) => item.toLowerCase() === theme.toLocaleLowerCase()
+            ) ||
+            this.Themes.light.find(
+                (item) => item.toLowerCase() === theme.toLocaleLowerCase()
+            )
+        ) {
+            this.theme = "ace/theme/" + theme.replace(/\s+/g, "_");
+            this.editors.forEach((editor) => editor.setTheme(this.theme));
+        }
+    }
+    get Theme() {
+        return this.theme;
+    }
+    get FontName() {
+        return this.fontName;
+    }
+    set FontName(value) {
+        this.fontName = value;
+    }
+    get FontSize() {
+        return this.fontSize;
+    }
+    set FontSize(value) {
+        this.fontSize = value;
+    }
+    get Editors() {
+        return this.editors;
+    }
 }
-const instance = new CodeEditor()
-Object.freeze(instance)
+const instance = new CodeEditor();
+Object.freeze(instance);
 
 /*  setHighlightRules (editor, language) {
     const lang = language || 'text'
@@ -177,4 +186,4 @@ Object.freeze(instance)
       session.bgTokenizer.start(0)
     })
   } */
-export default instance
+export default instance;

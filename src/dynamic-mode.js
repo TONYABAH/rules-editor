@@ -12,12 +12,6 @@ function autoImplementedMode (filename) {
   switch (ext) {
     case "js":
       return prefix + "javascript"
-    case "cs":
-      return prefix + "csharp"
-    case "php":
-      return prefix + "php"
-    case "rb":
-      return prefix + "ruby"
     case "json":
       return prefix + "json"
     default: 'text'
