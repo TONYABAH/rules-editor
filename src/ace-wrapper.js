@@ -1,5 +1,4 @@
-
-import ace from "ace-builds/src-noconflict/ace";
+import ace from "ace-builds/src-noconflict/ace.js";
 //const ace = window.ace
 const { Range, EditSession, UndoManager } = ace;
 //const { Range, EditSession, UndoManager } = ace
@@ -13,8 +12,11 @@ import "ace-builds/src-noconflict/theme-ambiance.js";
 import "ace-builds/src-noconflict/theme-chrome.js";
 import "ace-builds/src-noconflict/theme-textmate.js";
 import "ace-builds/webpack-resolver";
+
 const path = "ace-builds/src-noconflict/";
+
 ace.config.set("basePath", path);
+
 const TextHighlightRules = ace.require(
     "ace/mode/text_highlight_rules"
 ).TextHighlightRules;
