@@ -1,6 +1,10 @@
 import ace from "ace-builds/src-noconflict/ace.js";
 //const ace = window.ace
-const { Range, EditSession, UndoManager } = ace;
+import {
+    Range,
+    EditSession,
+    UndoManager,
+} from "ace-builds/src-noconflict/ace.js";
 //const { Range, EditSession, UndoManager } = ace
 import "ace-builds/src-noconflict/theme-cobalt.js";
 import "ace-builds/src-noconflict/theme-merbivore_soft.js";
