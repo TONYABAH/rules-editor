@@ -1,3 +1,3 @@
 /* eslint-disable */
-import AceEditor from './src'
-export default AceEditor
+import CodeEditor from "./src";
+export default CodeEditor;

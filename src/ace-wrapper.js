@@ -1,8 +1,9 @@
-// import ace from "ace-builds";
-const ace = window.ace
-// import { Range, EditSession, UndoManager } from "ace-builds";
-const { Range, EditSession, UndoManager } = ace
-/*import "ace-builds/src-noconflict/theme-cobalt.js";
+
+import ace from "ace-builds/src-noconflict/ace";
+//const ace = window.ace
+const { Range, EditSession, UndoManager } = ace;
+//const { Range, EditSession, UndoManager } = ace
+import "ace-builds/src-noconflict/theme-cobalt.js";
 import "ace-builds/src-noconflict/theme-merbivore_soft.js";
 import "ace-builds/src-noconflict/theme-monokai.js";
 import "ace-builds/src-noconflict/theme-tomorrow_night_blue.js";
@@ -13,7 +14,7 @@ import "ace-builds/src-noconflict/theme-chrome.js";
 import "ace-builds/src-noconflict/theme-textmate.js";
 import "ace-builds/webpack-resolver";
 const path = "ace-builds/src-noconflict/";
-ace.config.set("basePath", path);*/
+ace.config.set("basePath", path);
 const TextHighlightRules = ace.require(
     "ace/mode/text_highlight_rules"
 ).TextHighlightRules;
