@@ -26,9 +26,6 @@
   },
   "devDependencies": {
     "ace-builds": "^1.4.12",
-    "microbundle": "^0.13.0"
-  },
-  "dependencies": {
-    "rules-engine": "github:TONYABAH/rules-engine"
+    "microbundle": "^0.15.1"
   }
 }

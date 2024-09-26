@@ -1,3 +1,2 @@
 /* eslint-disable */
-import CodeEditor from './code-editor'
-export default CodeEditor
+export { CodeEditor } from "./code-editor";

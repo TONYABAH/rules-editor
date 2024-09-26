@@ -1,4 +1,3 @@
 /* eslint-disable */
-import CodeEditor from "./src";
-export default CodeEditor;
-
+export { CodeEditor } from "./src";
+//export default CodeEditor;

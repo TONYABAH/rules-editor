@@ -4,13 +4,14 @@ import Mode from "./default_mode";
 import ResourceMode from "./resource_mode";
 import dynamicMode from "./dynamic-mode";
 
-class CodeEditor {
-    constructor() {
+export class CodeEditor {
+    constructor(lang) {
         if (!CodeEditor.instance) {
             CodeEditor.instance = this;
         }
-        this.language = "en";
+        this.language = lang || "en";
         this.editors = [];
+        this.editor = null;
         this.defaults = {
             fontSize: 18,
             fontName: "Courier New",
@@ -75,11 +76,12 @@ class CodeEditor {
             readOnly: false,
             showGutter: true,
             animatedScroll: true,
-            minLines: 5,
-            maxLines: 'auto',
+            minLines: 20,
+            maxLines: Infinity,
             selectionStyle: "row",
             highlightActiveLine: true,
             showPrintMargin: true,
+            //autoScrollEditorIntoView: true,
         };
 
         editor = ace.edit(el, Object.assign(editorSettings, options));
@@ -87,11 +89,13 @@ class CodeEditor {
         editor.setSession(session);
         editor.renderer.setScrollMargin(10, 10, 10, 10);
         editor.$blockScrolling = Infinity;
+
         editor.setOptions({
             scrollPastEnd: 0.9,
             autoScrollEditorIntoView: true,
         });
         editor.focus();
+
         // editor.select()
         // editor.gotoLine(0)
         // editor.blur(true)
@@ -99,6 +103,8 @@ class CodeEditor {
         // this.editor.session.selection.on('changeCursor', function(){});
         this.setHighlightRule(editor, options.fileName);
         this.editors.push(editor);
+        this.editor = editor;
+
         setTimeout(() => {
             // let sel = editor.selection
             // sel.clearSelection()
@@ -118,6 +124,12 @@ class CodeEditor {
             editor.destroy();
             editor.container.remove();
         });
+    }
+    get Text() {
+        return this.editor?.getValue() || "";
+    }
+    set Text(val) {
+        return this.editor?.setValue(val);
     }
     get ThemeList() {
         return Themes;
@@ -158,9 +170,15 @@ class CodeEditor {
     get Editors() {
         return this.editors;
     }
+    get Editor() {
+        return this.editor;
+    }
+    set Editor(ed) {
+        this.editor = ed;
+    }
 }
-const instance = new CodeEditor();
-Object.freeze(instance);
+//const instance = new CodeEditor();
+//Object.freeze(instance);
 
 /*  setHighlightRules (editor, language) {
     const lang = language || 'text'
@@ -186,4 +204,4 @@ Object.freeze(instance);
       session.bgTokenizer.start(0)
     })
   } */
-export default instance;
+export default CodeEditor;
